@@ -2,18 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BookListRazor.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure.Internal;
-//using MySqlConnector;
-//using MySQL.Data.EntityFrameworkCore;
 
 namespace BookListRazor
 {
@@ -29,18 +23,6 @@ namespace BookListRazor
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors();
-            services.AddDbContextPool<ApplicationDbContext>
-                (dbContextOptions => dbContextOptions.UseMySql(
-                    "Server=localhost;port=3306;database=BookListRazor;user=root;password=Norusikas_1023;",
-                   new MySqlServerVersion(new Version(8, 0, 21)),
-                   mySqlOptions => mySqlOptions
-                        .EnableRetryOnFailure(
-                        maxRetryCount: 2,
-                        maxRetryDelay: TimeSpan.FromSeconds(30),
-                        errorNumbersToAdd: null)
-                    ));
-
             services.AddRazorPages();
         }
 
